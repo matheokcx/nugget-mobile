@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Vérifications automatiques avant chaque push : reproduit les jobs de la CI
+# (.github/workflows/ci.yml) en local pour éviter les allers-retours et gagner
+# du temps sur la CI. Pour ignorer ponctuellement : `git push --no-verify`.
+
+set -e
+
+echo "▶ pre-push : lint..."
+npm run lint
+
+echo "✔ pre-push : toutes les vérifications sont passées."

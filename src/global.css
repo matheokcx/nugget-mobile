@@ -1,4 +1,16 @@
 :root {
+  --primary: #FFC23D;
+  --primary-dark: #3B2D0C;
+  --secondary: #FF6F4F;
+  --secondary-dark: #43201A;
+
+  --title-font: 'bricolage grotesque';
+  --text-font: 'figtree';
+
+  --surface-light: #FFFFFF;
+  --surface: #FFF7E8;
+  --surface-dark: #F6EAD2;
+
   --font-display:
     Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
     Segoe UI Symbol, Noto Color Emoji;
