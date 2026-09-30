@@ -1,17 +1,15 @@
 import { View } from 'react-native';
 import AppTabs from '@/components/app-tabs';
 import * as SplashScreen from 'expo-splash-screen';
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
 
 SplashScreen.preventAutoHideAsync();
 
 const TabLayout = () => {
-  return (
-    <View>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </View>
-  );
+    return (
+        <View style={{ width: '100%', height: '100%' }}>
+            <AppTabs />
+        </View>
+    );
 };
 
 export default TabLayout;

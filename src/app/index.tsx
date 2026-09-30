@@ -1,63 +1,13 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
-const getDevMenuHint = () => {
-    const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-
-    if (Platform.OS === 'web') {
-        return <ThemedText type="small">use browser devtools</ThemedText>;
-    }
-
-    if (Device.isDevice) {
-        return (
-            <ThemedText type="small">
-                shake device or press <ThemedText type="code">m</ThemedText> in terminal
-            </ThemedText>
-        );
-    }
-
-    return (
-        <ThemedText type="small">
-            press <ThemedText type="code">{shortcut}</ThemedText>
-        </ThemedText>
-    );
-};
+const bottomTabInset: number = Platform.select({ ios: 50, android: 80 }) ?? 0;
 
 const HomeScreen = () => {
     return (
         <View style={styles.container}>
             <SafeAreaView style={styles.safeArea}>
-                <ThemedView style={styles.heroSection}>
-                    <AnimatedIcon />
-                    <ThemedText type="title" style={styles.title}>
-                        Welcome to&nbsp;Expo
-                    </ThemedText>
-                </ThemedView>
-
-                <ThemedText type="code" style={styles.code}>
-                    get started
-                </ThemedText>
-
-                <ThemedView type="backgroundElement" style={styles.stepContainer}>
-                    <HintRow
-                        title="Try editing"
-                        hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-                    />
-                    <HintRow title="Dev tools" hint={getDevMenuHint()} />
-                    <HintRow
-                        title="Fresh start"
-                        hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-                    />
-                </ThemedView>
-
-                {Platform.OS === 'web' && <WebBadge />}
+                <Text style={styles.title}>Welcome to Expo</Text>
             </SafeAreaView>
         </View>
     );
@@ -71,31 +21,14 @@ const styles = StyleSheet.create({
     },
     safeArea: {
         flex: 1,
-        paddingHorizontal: Spacing.four,
+        paddingHorizontal: 24,
         alignItems: 'center',
-        gap: Spacing.three,
-        paddingBottom: BottomTabInset + Spacing.three,
-        maxWidth: MaxContentWidth,
-    },
-    heroSection: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1,
-        paddingHorizontal: Spacing.four,
-        gap: Spacing.four,
+        gap: 16,
+        paddingBottom: bottomTabInset + 16,
+        maxWidth: 800,
     },
     title: {
         textAlign: 'center',
-    },
-    code: {
-        textTransform: 'uppercase',
-    },
-    stepContainer: {
-        gap: Spacing.three,
-        alignSelf: 'stretch',
-        paddingHorizontal: Spacing.three,
-        paddingVertical: Spacing.four,
-        borderRadius: Spacing.four,
     },
 });
 
