@@ -10,7 +10,6 @@
         "ios": {
             "icon": "./assets/expo.icon",
             "bundleIdentifier": "com.anonymous.nugget",
-            "font": ""
         },
         "android": {
             "adaptiveIcon": {

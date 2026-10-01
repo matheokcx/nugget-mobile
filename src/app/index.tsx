@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFonts } from 'expo-font';
 
 const bottomTabInset: number = Platform.select({ ios: 50, android: 80 }) ?? 0;
 
