@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
+        fontFamily: 'BricolageGrotesque-Bold',
     },
 });
 
