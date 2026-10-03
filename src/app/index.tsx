@@ -1,36 +1,27 @@
 import { StyleSheet, View, Text, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useFonts } from 'expo-font';
-
-const bottomTabInset: number = Platform.select({ ios: 50, android: 80 }) ?? 0;
+import { tokens } from '@/designTokens';
 
 const HomeScreen = () => {
     return (
-        <View style={styles.container}>
-            <SafeAreaView style={styles.safeArea}>
-                <Text style={styles.title}>Welcome to Expo</Text>
-            </SafeAreaView>
+        <View style={styles.screen}>
+            <Text style={styles.title}>Nugget</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    screen: {
+        maxWidth: 800,
         flex: 1,
         justifyContent: 'center',
         flexDirection: 'row',
-    },
-    safeArea: {
-        flex: 1,
         paddingHorizontal: 24,
-        alignItems: 'center',
-        gap: 16,
-        paddingBottom: bottomTabInset + 16,
-        maxWidth: 800,
+        paddingVertical: (Platform.select({ ios: 50, android: 80 }) ?? 0) + 16,
     },
     title: {
         textAlign: 'center',
-        fontFamily: 'BricolageGrotesque-Bold',
+        fontSize: 32,
+        color: tokens.colors.text.primary,
     },
 });
 
