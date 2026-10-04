@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { tokens } from '@/designTokens';
+import AuthProvider from '@/components/AuthProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,7 +46,9 @@ const TabLayout = () => {
 
     return (
         <View style={{ width: '100%', height: '100%' }}>
-            <AppTabs />
+            <AuthProvider>
+                <AppTabs />
+            </AuthProvider>
         </View>
     );
 };
