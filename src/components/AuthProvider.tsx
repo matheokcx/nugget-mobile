@@ -4,6 +4,7 @@ import { AuthService, LoginDto, SignUpDto } from '@/services/authService';
 import { storage } from '@/lib/storage';
 import { User } from '@/types';
 import { useRouter } from 'expo-router';
+import { setAuthToken } from '@/lib/axios';
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
     const router = useRouter();
@@ -14,13 +15,14 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     const signIn = async (dto: LoginDto): Promise<void> => {
         try {
             const { data: loginResponse } = await AuthService.login(dto);
+            setAuthToken(loginResponse.token);
             const { data: user } = await AuthService.getMe(loginResponse.token);
 
             setToken(loginResponse.token);
             await storage.setItem('token', loginResponse.token);
             setUser(user);
 
-            router.navigate('/home');
+            router.navigate('/');
         } catch (error: unknown) {
             throw new Error('Problème rencontré au moment de ta connexion');
         }
@@ -41,6 +43,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             return user;
         } catch (error: unknown) {
             setToken(null);
+            router.navigate('/login');
             throw new Error('Un problème est survenu au moment de la récupération de tes infos');
         }
     };
@@ -53,13 +56,15 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
     useEffect(() => {
         const func = async () => {
-            const currentToken: string | null = await storage.getItem('token');
-
-            if (currentToken) {
-                setToken(currentToken);
-                await getMe(currentToken);
-                router.navigate('/home');
-            }
+            await storage.getItem('token').then(async (value: string | null) => {
+                if (value !== null) {
+                    setToken(value);
+                    await getMe(value);
+                    router.navigate('/');
+                } else {
+                    router.navigate('/login');
+                }
+            });
         };
         func();
     }, [token]);
