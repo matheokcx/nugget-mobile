@@ -9,7 +9,8 @@ interface AuthContextType {
     token: string | null;
     user: User | null;
     isAuthenticated: boolean;
-    getMe?: (token: string) => Promise<User>;
+    isLoading: boolean;
+    getMe?: (token: string) => Promise<User | null>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -19,6 +20,7 @@ export const AuthContext = createContext<AuthContextType>({
     token: null,
     user: null,
     isAuthenticated: false,
+    isLoading: true,
 });
 
 export const useAuth = () => {

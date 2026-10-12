@@ -1,11 +1,10 @@
-import { View } from 'react-native';
-import AppTabs from '@/components/AppTabs';
+import '../global.css';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
-import { tokens } from '@/designTokens';
 import AuthProvider from '@/components/AuthProvider';
 import { Stack } from 'expo-router';
+import { Box } from '@/components/ui/box';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -46,14 +45,14 @@ const TabLayout = () => {
     }
 
     return (
-        <View style={{ width: '100%', height: '100%' }}>
+        <Box className="w-full h-full p-4 bg-background">
             <AuthProvider>
-                <Stack>
-                    <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                    <Stack.Screen name="login" options={{ title: 'Connexion' }} />
+                <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="(tabs)" />
+                    <Stack.Screen name="login" />
                 </Stack>
             </AuthProvider>
-        </View>
+        </Box>
     );
 };
 

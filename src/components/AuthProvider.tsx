@@ -11,6 +11,14 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
     const [token, setToken] = useState<string | null>(null);
     const [user, setUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const signOut = useCallback(async (): Promise<void> => {
+        setToken(null);
+        setUser(null);
+        setAuthToken(null); // config token axios
+        await AuthService.logout();
+    }, []);
 
     const signIn = async (dto: LoginDto): Promise<void> => {
         try {
@@ -23,8 +31,8 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             setUser(user);
 
             router.navigate('/');
-        } catch (error: unknown) {
-            throw new Error('Problème rencontré au moment de ta connexion');
+        } catch (error) {
+            throw new Error(`Problème rencontré au moment de ta connexion: ${error}`);
         }
     };
 
@@ -36,38 +44,38 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         }
     };
 
-    const getMe = async (token: string): Promise<User> => {
+    const getMe = async (token: string): Promise<User | null> => {
         try {
             const { data: user } = await AuthService.getMe(token);
             setUser(user);
             return user;
         } catch (error: unknown) {
-            setToken(null);
-            router.navigate('/login');
-            throw new Error('Un problème est survenu au moment de la récupération de tes infos');
+            await signOut();
+            return null;
         }
     };
 
-    const signOut = useCallback(async (): Promise<void> => {
-        setToken(null);
-        setUser(null);
-        await AuthService.logout();
-    }, [setToken, setUser]);
-
     useEffect(() => {
         const func = async () => {
-            await storage.getItem('token').then(async (value: string | null) => {
+            try {
+                const value: string | null = await storage.getItem('token');
+
                 if (value !== null) {
+                    const { data: restoredUser } = await AuthService.getMe(value);
+
                     setToken(value);
-                    await getMe(value);
-                    router.navigate('/');
-                } else {
-                    router.navigate('/login');
+                    setAuthToken(value);
+                    setUser(restoredUser);
+                    router.replace('/');
                 }
-            });
+            } catch (error: unknown) {
+                await signOut();
+            } finally {
+                setIsLoading(false);
+            }
         };
         func();
-    }, [token]);
+    }, []);
 
     return (
         <AuthContext.Provider
@@ -79,6 +87,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
                 token: token,
                 user: user,
                 isAuthenticated: token !== null,
+                isLoading: isLoading,
             }}
         >
             {children}

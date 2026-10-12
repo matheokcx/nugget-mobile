@@ -1,19 +1,18 @@
-import { Platform, View, Text } from 'react-native';
+import { Text } from 'react-native';
+import { useAuth } from '@/hooks/useAuth';
+import { Button, ButtonText } from '@/components/ui/button';
+import { VStack } from '@/components/ui/vstack';
 
 const HomePage = () => {
+    const { signOut } = useAuth();
+
     return (
-        <View
-            style={{
-                maxWidth: 800,
-                flex: 1,
-                justifyContent: 'center',
-                flexDirection: 'column',
-                paddingHorizontal: 24,
-                paddingVertical: (Platform.select({ ios: 50, android: 80 }) ?? 0) + 16,
-            }}
-        >
+        <VStack>
             <Text>izdidzqv</Text>
-        </View>
+            <Button onPress={signOut}>
+                <ButtonText>Se déconnecter</ButtonText>
+            </Button>
+        </VStack>
     );
 };
 
