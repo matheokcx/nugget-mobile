@@ -9,6 +9,7 @@ import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
 import { Spinner } from '@/components/ui/spinner';
+import { Link } from 'expo-router';
 
 const LoginPage = () => {
     const { signIn } = useAuth();
@@ -88,6 +89,9 @@ const LoginPage = () => {
                             {error}
                         </Text>
                     )}
+                    <Text>
+                        Vous n'êtes pas inscrit ? <Link href="/sign-up">Inscrivez-vous</Link>
+                    </Text>
                     <Button
                         onPress={login}
                         isDisabled={isLoading || !email.trim() || !password.trim()}

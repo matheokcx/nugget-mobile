@@ -4,9 +4,10 @@ import { Card } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
+import { Button, ButtonText } from '@/components/ui/button';
 
 const HomePage = () => {
-    const { user } = useAuth();
+    const { user, signOut } = useAuth();
 
     return (
         <Screen>
@@ -25,6 +26,9 @@ const HomePage = () => {
                     </Text>
                 </VStack>
             </Card>
+            <Button onPress={signOut}>
+                <ButtonText>Déconnexion</ButtonText>
+            </Button>
         </Screen>
     );
 };
