@@ -21,6 +21,13 @@ const AppTabs = () => {
                     renderingMode="template"
                 />
             </NativeTabs.Trigger>
+            <NativeTabs.Trigger name="profile">
+                <NativeTabs.Trigger.Label>Profil</NativeTabs.Trigger.Label>
+                <NativeTabs.Trigger.Icon
+                    sf={{ default: 'person', selected: 'person.fill' }}
+                    md="person"
+                />
+            </NativeTabs.Trigger>
         </NativeTabs>
     );
 };
