@@ -7,8 +7,8 @@ const colors = {
     },
     surface: {
         light: '#ffffff',
-        normal: '#fff7e8',
-        dark: '#f6ead2',
+        normal: '#f2f2f2',
+        dark: '#e6e5e6',
     },
 };
 

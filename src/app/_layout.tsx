@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import AuthProvider from '@/components/AuthProvider';
 import { Stack } from 'expo-router';
-import { Box } from '@/components/ui/box';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,14 +45,14 @@ const TabLayout = () => {
     }
 
     return (
-        <Box className="w-full h-full p-4 bg-background">
+        <GluestackUIProvider>
             <AuthProvider>
                 <Stack screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="(tabs)" />
                     <Stack.Screen name="login" />
                 </Stack>
             </AuthProvider>
-        </Box>
+        </GluestackUIProvider>
     );
 };
 
