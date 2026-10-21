@@ -45,7 +45,7 @@ const buttonStyle = tva({
     },
 });
 const buttonTextStyle = tva({
-    base: 'web:select-none font-body',
+    base: 'web:select-none font-subtitle',
     parentVariants: {
         variant: {
             default: 'text-primary-foreground',

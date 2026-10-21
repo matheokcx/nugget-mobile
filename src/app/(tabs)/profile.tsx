@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
+import PaymentButton from '@/components/buttons/PaymentButton';
 
 const ProfilePage = () => {
     const { user, signOut } = useAuth();
@@ -51,7 +52,8 @@ const ProfilePage = () => {
                     </Text>
                 </VStack>
             </Card>
-            <Button onPress={signOut}>
+            <PaymentButton ctaText="Passer à premium" />
+            <Button onPress={signOut} variant="destructive">
                 <ButtonText>Déconnexion</ButtonText>
             </Button>
         </Screen>

@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';
+import PaymentButton from '@/components/buttons/PaymentButton';
 
 const HomePage = () => {
     const { user } = useAuth();
@@ -25,6 +26,8 @@ const HomePage = () => {
                     </Text>
                 </VStack>
             </Card>
+
+            <PaymentButton ctaText="Souscrire à l'abonnement" />
         </Screen>
     );
 };
