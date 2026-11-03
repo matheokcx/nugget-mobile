@@ -84,12 +84,15 @@ const LoginPage = () => {
                             />
                         </Input>
                     </FormControl>
+                    <Text size="sm" className="text-right">
+                        <Link href="/forgot-password">Mot de passe oublié ?</Link>
+                    </Text>
                     {error && (
                         <Text size="sm" className="text-destructive" accessibilityRole="alert">
                             {error}
                         </Text>
                     )}
-                    <Text>
+                    <Text className="text-center">
                         Vous n'êtes pas inscrit ? <Link href="/sign-up">Inscrivez-vous</Link>
                     </Text>
                     <Button

@@ -14,6 +14,18 @@ export type SignUpDto = {
     password: string;
 };
 
+export type ForgotPasswordDto = {
+    email: string;
+};
+
+export type ConfirmResetDto = ForgotPasswordDto & {
+    code: string;
+};
+
+export type ResetPasswordDto = ForgotPasswordDto & {
+    newPassword: string;
+};
+
 export class AuthService {
     static async login(dto: LoginDto): Promise<AxiosResponse<{ token: string }>> {
         return await apiClient.post('/auth/login', dto);
@@ -33,5 +45,17 @@ export class AuthService {
 
     static async logout(): Promise<void> {
         await storage.removeItem('token');
+    }
+
+    static async forgotPassword(dto: ForgotPasswordDto): Promise<AxiosResponse<void>> {
+        return await apiClient.post<void>('/auth/forgot-password', dto);
+    }
+
+    static async confirmReset(dto: ConfirmResetDto): Promise<AxiosResponse<void>> {
+        return await apiClient.post<void>('/auth/confirm-reset', dto);
+    }
+
+    static async resetPassword(dto: ResetPasswordDto): Promise<AxiosResponse<void>> {
+        return await apiClient.patch<void>('/auth/reset-password', dto);
     }
 }
