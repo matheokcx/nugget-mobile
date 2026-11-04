@@ -34,7 +34,7 @@ export const config = {
     },
     dark: {
         ...shared,
-        '--background': colors.text.primaryDark,
+        '--background': '#202020',
         '--foreground': colors.surface.normal,
         '--border': `${colors.surface.dark}33`,
         '--input': colors.text.secondaryDark,

@@ -7,7 +7,7 @@ const colors = {
     },
     surface: {
         light: '#ffffff',
-        normal: '#f2f2f2',
+        normal: '#ffffff',
         dark: '#e6e5e6',
     },
 };
