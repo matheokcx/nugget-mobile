@@ -1,9 +1,12 @@
-import { View } from 'react-native';
-import AppTabs from '@/components/app-tabs';
+import '../global.css';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
-import { tokens } from '@/designTokens';
+import AuthProvider from '@/components/AuthProvider';
+import { Stack } from 'expo-router';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import Purchases, { LOG_LEVEL } from 'react-native-purchases';
+import { Platform } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -39,14 +42,34 @@ const TabLayout = () => {
         }
     }, [loaded, error]);
 
+    useEffect(() => {
+        Purchases.setLogLevel(LOG_LEVEL.VERBOSE);
+
+        const iosApiKey: string = process.env.EXPO_PUBLIC_IOS_API_KEY ?? '';
+        const androidApiKey: string = process.env.EXPO_PUBLIC_ANDROID_API_KEY ?? '';
+
+        if (Platform.OS === 'ios') {
+            Purchases.configure({ apiKey: iosApiKey });
+        } else if (Platform.OS === 'android') {
+            Purchases.configure({ apiKey: androidApiKey });
+        }
+    }, []);
+
     if (!loaded && !error) {
         return null;
     }
 
     return (
-        <View style={{ width: '100%', height: '100%' }}>
-            <AppTabs />
-        </View>
+        <GluestackUIProvider>
+            <AuthProvider>
+                <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="(tabs)" />
+                    <Stack.Screen name="login" />
+                    <Stack.Screen name="forgot-password" />
+                    <Stack.Screen name="sign-up" />
+                </Stack>
+            </AuthProvider>
+        </GluestackUIProvider>
     );
 };
 
