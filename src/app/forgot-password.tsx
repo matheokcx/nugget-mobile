@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { isAxiosError } from 'axios';
 import { router } from 'expo-router';
 import Screen from '@/components/Screen';
 import CodeStep from '@/components/password-reset/CodeStep';
 import EmailStep from '@/components/password-reset/EmailStep';
 import PasswordStep from '@/components/password-reset/PasswordStep';
 import { Button, ButtonText } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
 import { Text } from '@/components/ui/text';
 import { VStack } from '@/components/ui/vstack';

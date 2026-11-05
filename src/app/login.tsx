@@ -112,7 +112,7 @@ const LoginPage = () => {
 
                 <Divider />
                 <Text className="text-center">
-                    Vous n'êtes pas inscrit ?{' '}
+                    Vous n'êtes pas inscrit ?
                     <Link href="/sign-up" className="text-primary">
                         Inscrivez-vous
                     </Link>

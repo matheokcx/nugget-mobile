@@ -40,7 +40,9 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         try {
             await AuthService.signup(dto).then((response) => router.navigate('/login'));
         } catch (error: unknown) {
-            throw new Error('Un problème est survenu au moment de ton inscription');
+            throw new Error(
+                `Un problème est survenu au moment de ton inscription: ${(error as Error).message}`,
+            );
         }
     };
 
@@ -51,6 +53,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             return user;
         } catch (error: unknown) {
             await signOut();
+            console.error(error);
             return null;
         }
     };
@@ -70,6 +73,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
                 }
             } catch (error: unknown) {
                 await signOut();
+                console.error(error);
             } finally {
                 setIsLoading(false);
             }

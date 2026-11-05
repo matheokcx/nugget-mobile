@@ -130,7 +130,7 @@ const SignUpPage = () => {
                 </Button>
                 <Divider />
                 <Text className="text-center">
-                    Vous êtes déjà inscrit ?{' '}
+                    Vous êtes déjà inscrit ?
                     <Link href="/login" className="text-primary">
                         connectez-vous
                     </Link>
