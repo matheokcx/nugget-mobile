@@ -79,7 +79,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             }
         };
         func();
-    }, []);
+    }, [router, signOut]);
 
     return (
         <AuthContext.Provider

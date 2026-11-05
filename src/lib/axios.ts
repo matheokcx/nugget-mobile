@@ -1,6 +1,6 @@
-import axios, { AxiosInstance } from 'axios';
+import { AxiosInstance, create } from 'axios';
 
-export const apiClient: AxiosInstance = axios.create({
+export const apiClient: AxiosInstance = create({
     baseURL: process.env.EXPO_PUBLIC_API_URL,
     timeout: 10000,
 });

@@ -1,4 +1,5 @@
 'use client';
+/* eslint-disable react-hooks/immutability -- Reanimated shared values are intentionally mutated in gesture worklets. */
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import {
     View,
@@ -377,7 +378,7 @@ const SlidableImageGallery = React.memo(function SlidableImageGallery({
             setLocalIndex(currentIndex);
             prevCurrentIndexRef.current = currentIndex;
         }
-    }, [currentIndex]);
+    }, [currentIndex, localIndex]);
 
     // Handle scroll - track position without updating state
     const handleScroll = useCallback((event: any) => {

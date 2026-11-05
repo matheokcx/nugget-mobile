@@ -137,10 +137,10 @@ const TabsList = React.forwardRef<React.ComponentRef<typeof UITabs.List>, ITabsL
         const context = React.useContext(TabsContext);
 
         const flatListRef = useRef<any>(null);
-
-        if (!context) return null;
-
-        const { orientation, setScrollOffset, selectedKey, listRef } = context;
+        const orientation = context?.orientation;
+        const setScrollOffset = context?.setScrollOffset ?? (() => {});
+        const selectedKey = context?.selectedKey;
+        const listRef = context?.listRef;
 
         // Shared value for indicator sync
         const animatedScrollOffset = useSharedValue(0);
@@ -188,17 +188,14 @@ const TabsList = React.forwardRef<React.ComponentRef<typeof UITabs.List>, ITabsL
         /**
          * Native animated scroll handler (ONLY for iOS / Android)
          */
-        const nativeScrollHandler =
-            Platform.OS === 'web'
-                ? undefined
-                : useAnimatedScrollHandler({
-                      onScroll: (event) => {
-                          'worklet';
-                          const x = event.contentOffset.x;
-                          animatedScrollOffset.value = x;
-                          runOnJS(setScrollOffset)(x);
-                      },
-                  });
+        const nativeScrollHandler = useAnimatedScrollHandler({
+            onScroll: (event) => {
+                'worklet';
+                const x = event.contentOffset.x;
+                animatedScrollOffset.value = x;
+                runOnJS(setScrollOffset)(x);
+            },
+        });
 
         /**
          * Web scroll handler (JS thread)
@@ -227,6 +224,8 @@ const TabsList = React.forwardRef<React.ComponentRef<typeof UITabs.List>, ITabsL
                 ),
             };
         }, [children]);
+
+        if (!context) return null;
 
         if (orientation === 'horizontal') {
             return (
