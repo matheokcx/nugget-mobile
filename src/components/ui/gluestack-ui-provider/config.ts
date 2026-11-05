@@ -44,7 +44,7 @@ export const config = {
         '--accent-foreground': colors.surface.normal,
         '--popover': colors.text.secondaryDark,
         '--popover-foreground': colors.surface.normal,
-        '--card': colors.text.secondaryDark,
+        '--card': '#303030',
         '--card-foreground': colors.surface.normal,
     },
 };

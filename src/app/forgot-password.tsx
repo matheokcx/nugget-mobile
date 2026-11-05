@@ -50,44 +50,38 @@ const ForgotPasswordPage = () => {
 
     return (
         <Screen centered keyboardAware>
-            <Card>
-                <Heading size="lg" className="text-center">
-                    Mot de passe oublié
-                </Heading>
-                <VStack space="lg">
-                    {currentState.error && (
-                        <Text size="sm" className="text-destructive">
-                            {currentState.error}
-                        </Text>
-                    )}
-                    {currentState.step === 'email' && (
-                        <EmailStep
-                            state={currentState}
-                            setState={setCurrentState}
-                            sendCode={sendCode}
-                        />
-                    )}
-                    {currentState.step === 'code' && (
-                        <CodeStep
-                            state={currentState}
-                            setState={setCurrentState}
-                            sendCode={sendCode}
-                        />
-                    )}
-                    {currentState.step === 'password' && (
-                        <PasswordStep state={currentState} setState={setCurrentState} />
-                    )}
-                    {currentState.step !== 'code' && (
-                        <Button
-                            variant="outline"
-                            onPress={() => router.replace('/login')}
-                            isDisabled={currentState.isLoading}
-                        >
-                            <ButtonText>Retour à la connexion</ButtonText>
-                        </Button>
-                    )}
-                </VStack>
-            </Card>
+            <Heading size="xl" className="text-center">
+                Mot de passe oublié
+            </Heading>
+            <VStack space="lg">
+                {currentState.error && (
+                    <Text size="sm" className="text-destructive">
+                        {currentState.error}
+                    </Text>
+                )}
+                {currentState.step === 'email' && (
+                    <EmailStep
+                        state={currentState}
+                        setState={setCurrentState}
+                        sendCode={sendCode}
+                    />
+                )}
+                {currentState.step === 'code' && (
+                    <CodeStep state={currentState} setState={setCurrentState} sendCode={sendCode} />
+                )}
+                {currentState.step === 'password' && (
+                    <PasswordStep state={currentState} setState={setCurrentState} />
+                )}
+                {currentState.step !== 'code' && (
+                    <Button
+                        variant="outline"
+                        onPress={() => router.replace('/login')}
+                        isDisabled={currentState.isLoading}
+                    >
+                        <ButtonText>Retour à la connexion</ButtonText>
+                    </Button>
+                )}
+            </VStack>
         </Screen>
     );
 };

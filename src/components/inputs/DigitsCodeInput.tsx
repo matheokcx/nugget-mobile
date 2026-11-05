@@ -24,8 +24,8 @@ const DigitsCodeInput = ({ state, setState, onSubmit }: CodeInputProps) => {
                             isFocused &&
                             !state.isLoading &&
                             index === Math.min(state.code.length, 5)
-                                ? 'border-ring bg-accent'
-                                : 'border-border bg-input'
+                                ? 'border-ring'
+                                : 'border-border'
                         }`}
                     >
                         <Text size="xl" className="font-subtitle">
